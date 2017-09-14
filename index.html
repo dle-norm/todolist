@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo liste</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body ng-app="monApp"﻿ ng-controller="myCtrl">
+        <div class="col-md-offset-5 col-md-4">
+            <button ng-click="deleteAllTask()">Supprimer tout</button>
+            <input type="text" ng-model="tasks"/>
+            <button ng-click="addTask()">Ajoute</button>
+            
+            <div ng-repeat="todo in list">
+                <h1>
+                    <i ng-class="{'fa-star': todo.favourite, 'fa-star-o': !todo.favourite}" class="fa"></i>
+                    {{todo.task}}
+                    <input id="checkBox" ng-click="isFavourite($index)" type="checkbox">
+                </h1>
+                <input type="text" id="searchReplay" ng-model="subTaskName"/>
+                <button id="clearText" ng-click="addSubTask($index, subTaskName)">Ajoute sous tache</button>
+                <button ng-click="deleteTask($index)">Supprime tache</button>
+                <div ng-repeat="under in todo.subTask track by $index">
+                    <h2>{{under}}</h2>
+                    <button ng-click="deleteSubTask($parent.$index, $index)">Supprime sous tache</button>
+                </div>
+                <hr>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+            <script src="myCtrl.js"></script>
+            <script src="https://use.fontawesome.com/1f937565ea.js"></script>
+        </div>
+    </body>
+</html>
