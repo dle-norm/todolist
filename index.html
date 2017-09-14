@@ -6,22 +6,22 @@
     </head>
     <body ng-app="monApp"﻿ ng-controller="myCtrl">
         <div class="col-md-offset-5 col-md-4">
-            <button ng-click="deleteAllTask()">Supprimer tout</button>
+            <button ng-click="list.deleteAllTask()">Supprimer tout</button>
             <input type="text" ng-model="tasks"/>
-            <button ng-click="addTask()">Ajoute</button>
+            <button ng-click="list.addTask(tasks)">Ajoute</button>
             
-            <div ng-repeat="todo in list">
+            <div ng-repeat="todo in list.list">
                 <h1>
                     <i ng-class="{'fa-star': todo.favourite, 'fa-star-o': !todo.favourite}" class="fa"></i>
                     {{todo.task}}
-                    <input id="checkBox" ng-click="isFavourite($index)" type="checkbox">
+                    <input id="checkBox" ng-click="list.isFavourite($index)" type="checkbox">
                 </h1>
                 <input type="text" id="searchReplay" ng-model="subTaskName"/>
-                <button id="clearText" ng-click="addSubTask($index, subTaskName)">Ajoute sous tache</button>
-                <button ng-click="deleteTask($index)">Supprime tache</button>
+                <button id="clearText" ng-click="list.addSubTask($index, subTaskName)">Ajoute sous tache</button>
+                <button ng-click="list.deleteTask($index)">Supprime tache</button>
                 <div ng-repeat="under in todo.subTask track by $index">
                     <h2>{{under}}</h2>
-                    <button ng-click="deleteSubTask($parent.$index, $index)">Supprime sous tache</button>
+                    <button ng-click="list.deleteSubTask($parent.$index, $index)">Supprime sous tache</button>
                 </div>
                 <hr>
             </div>

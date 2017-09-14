@@ -1,31 +1,36 @@
 var app = angular.module("monApp",[]);
-app.controller('myCtrl', function($scope) {
-    $scope.list = [];
-    $scope.addTask = function () {
-        var tmp = {
-            task : $scope.tasks,
-            favourite: false,
-            subTask : []
-        };
-        $scope.tasks = "";
-        $scope.list.push(tmp);
-
-    };
-    $scope.deleteTask = function (id) {
-        $scope.list.splice(id, 1);
-    };
-    $scope.addSubTask = function (id, subTaskName) {
-        if ($scope.list[id].subTask.length < 3) {
-            $scope.list[id].subTask.push(subTaskName);
+app.factory('TaskFactory', function () {
+    var task = {
+        list : [],
+        addTask : function(TaskName) {
+            var tmp = {
+                task : TaskName,
+                favourite: false,
+                subTask : []
+            };
+            this.list.push(tmp);
+        },
+        deleteTask : function(id) {
+            this.list.splice(id, 1);
+        },
+        addSubTask : function(id, subTaskName) {
+            if (this.list[id].subTask.length < 3) {
+                this.list[id].subTask.push(subTaskName);
+            }
+        },
+        deleteSubTask : function(id, index) {
+            this.list[id].subTask.splice(index, 1);
+        },
+        isFavourite : function(id) {
+            this.list[id].favourite = !this.list[id].favourite;
+        },
+        deleteAllTask : function() {
+            this.list = [];
         }
-    };
-    $scope.deleteSubTask = function (id, index) {
-        $scope.list[id].subTask.splice(index, 1);  
-    };
-    $scope.isFavourite = function (id) {
-        $scope.list[id].favourite = !$scope.list[id].favourite;
+
     }
-    $scope.deleteAllTask = function () {
-        $scope.list = [];
-    }
+    return task;
+})
+app.controller('myCtrl', function($scope, TaskFactory) {
+    $scope.list = TaskFactory;
 });
