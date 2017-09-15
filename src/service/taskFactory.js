@@ -1,4 +1,3 @@
-var app = angular.module("monApp",[]);
 app.factory('TaskFactory', function () {
     var task = {
         list : [],
@@ -30,7 +29,4 @@ app.factory('TaskFactory', function () {
 
     }
     return task;
-})
-app.controller('myCtrl', function($scope, TaskFactory) {
-    $scope.list = TaskFactory;
 });
