@@ -1,4 +1,4 @@
-app.factory('TaskFactory', function () {
+app.factory('TaskFactory', function ($http) {
     var task = {
         list : [],
         addTask : function(TaskName) {
@@ -25,8 +25,15 @@ app.factory('TaskFactory', function () {
         },
         deleteAllTask : function() {
             this.list = [];
+        },
+        setTask : function() {
+            var that = this;
+            $http.get('https://demo2298213.mockable.io/tasks').then(function (reponse) {
+                that.list = reponse.data.tasks;
+            },function (reponse) {
+                console.log(reponse);
+            });
         }
-
     }
     return task;
 });

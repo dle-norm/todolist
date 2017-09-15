@@ -12,9 +12,8 @@
             
             <div ng-repeat="todo in list.list">
                 <h1>
-                    <i ng-class="{'fa-star': todo.favourite, 'fa-star-o': !todo.favourite}" class="fa"></i>
+                    <i ng-click="list.isFavourite($index)" ng-class="{'fa-star': todo.favourite, 'fa-star-o': !todo.favourite}" class="fa"></i>
                     {{todo.task}}
-                    <input id="checkBox" ng-click="list.isFavourite($index)" type="checkbox">
                 </h1>
                 <input type="text" id="searchReplay" ng-model="subTaskName"/>
                 <button id="clearText" ng-click="list.addSubTask($index, subTaskName)">Ajoute sous tache</button>
